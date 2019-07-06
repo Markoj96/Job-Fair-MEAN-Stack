@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col col-sm-12">
+      <div *ngIf="fairs != null && fairs.length > 0">
+        <div class="card rounded-0">
+          <div class="card-header">
+              <h3 class="mb-0">Fairs list</h3>
+          </div>
+          <div class="card-body">
+            <table class="table table-striped">
+              <th>#</th>
+              <th>Fair</th>
+              <tr *ngFor="let fair of fairs; let i=index;">
+                <td>{{ i }}</td>
+                <td><a [routerLink]="['/fairs/show', fair._id]">{{ fair.Fair }}</a></td>
+              </tr>
+            </table>
+            <a *ngIf="authService.isAdministrator() == true" routerLink="/fairs/add"><button class="btn btn-primary" [disabled]="activeFair == true || (systemSettings && systemSettings.Fair_Enabled == false)">Add fair</button></a>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="fairs == null">
+        <h3>No fairs created</h3>
+        <a *ngIf="authService.isAdministrator() == true" routerLink="/fairs/add"><button class="btn btn-primary" [disabled]="systemSettings && systemSettings.Fair_Enabled == false">Add fair</button></a>
+      </div>
+    </div>
+  </div>

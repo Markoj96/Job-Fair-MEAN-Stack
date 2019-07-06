@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col col-sm-12">
+    <div class="card rounded-0">
+      <div class="card-header">
+        <h3 class="mb-0">System settings</h3>
+      </div>
+      <div class="card-body">
+        <table class="table table-striped">
+          <tr>
+            <td>Curriculum Vitaes</td>
+            <td><input type="checkbox" name="CV_Enabled" [(ngModel)]="CV_Enabled"></td>
+          </tr>
+          <tr>
+            <td>Fairs</td>
+            <td><input type="checkbox" name="Fair_Enabled" [(ngModel)]="Fair_Enabled"></td>
+          </tr>
+        </table>
+        
+        <button (click)="saveSettings()" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

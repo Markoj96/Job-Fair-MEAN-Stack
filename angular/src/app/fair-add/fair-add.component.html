@@ -1,0 +1,157 @@
+<div class="row pt-5 pb-5">
+  <div class="col col-sm-12 mx-auto">
+    <div class="card rounded-0">
+      <div class="card-header">
+          <h3 class="mb-0">Add a new fair</h3>
+      </div>
+      <div class="card-body">
+        <mat-vertical-stepper linear>
+          <mat-step [stepControl]="formStep1">
+            <form [formGroup]="formStep1">
+              <input type="file" (change)="onFile1Change($event)" formControlName="FairFile" required>
+              <br /><br />
+              <button class="btn btn-primary" mat-button matStepperNext [disabled]="!formStep1.valid">Next</button>
+            </form>
+          </mat-step>
+          <mat-step [stepControl]="formStep2">
+            <form [formGroup]="formStep2">
+              <input type="file" (change)="onFile2Change($event)" formControlName="PackageFile" required>
+              <br /><br />
+              <button class="btn btn-primary" mat-button matStepperNext [disabled]="!formStep2.valid">Next</button>
+            </form>
+          </mat-step>
+          <mat-step>
+            <div *ngIf="fair">
+              <table class="table table-striped" *ngFor="let newFair of fair.Fairs">
+                <tr>
+                  <th><h3>Fair {{ i }}</h3></th>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>Fair</th>
+                  <td>{{ newFair.Fair}}</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>StartDate</th>
+                  <td>{{ newFair.StartDate }}</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>EndDate</th>
+                  <td>{{  newFair.EndDate }}</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>StartTime</th>
+                  <td>{{ newFair.StartTime }}</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>EndTime</th>
+                  <td>{{ newFair.EndTime }}</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>Place</th>
+                  <td>{{ newFair.Place }}</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>About</th>
+                  <td>{{ newFair.About }}</td>
+                  <td></td>
+                </tr>
+              </table>
+              <table class="table table-striped" *ngFor="let location of fair.Locations; let i = index">
+                <tr>
+                  <th>Place</th>
+                  <td>{{ location.Place }}</td>
+                  <td></td>
+                </tr>
+                <tr>
+                    <th>Location</th>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr *ngFor="let name of location.Location">
+                  <td></td>
+                  <th>Name</th>
+                  <td>{{ name.Name }}</td>
+                </tr>
+              </table>
+            </div>
+            <div *ngIf="package">
+              <table class="table table-striped" *ngFor="let newPackage of package.Packages; let i=index">
+                <tr>
+                  <th><h3>Package {{ i }}</h3></th>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>Title</th>
+                  <td>{{ newPackage.Title }}</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>Content</th>
+                  <td>{{ newPackage.Content }}</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>VideoPromotion</th>
+                  <td>{{ newPackage.VideoPromotion }}</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>NoLessons</th>
+                  <td>{{ newPackage.NoLessons }}</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>NoWorkchops</th>
+                  <td>{{ newPackage.NoWorkchops }}</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>NoPresentation</th>
+                  <td>{{ newPackage.NoPresentation }}</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>Price</th>
+                  <td>{{ newPackage.Price }}</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>MaxCompanies</th>
+                  <td>{{ newPackage.MaxCompanies }}</td>
+                  <td></td>
+                </tr>
+              </table>
+              <table class="table table-striped" *ngFor="let additional of package.Additional; let i = index">
+                <tr>
+                  <th><h3>Additional {{ i }}</h3></th>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>Title</th>
+                  <td>{{ additional.Title }}</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>Price</th>
+                  <td>{{ additional.Price }}</td>
+                  <td></td>
+                </tr>
+              </table>
+            </div>
+            <button type="button" class="btn btn-primary" (click)="addFair()">Add fair</button>
+          </mat-step>
+        </mat-vertical-stepper>
+      </div>
+    </div>
+  </div>
+</div>

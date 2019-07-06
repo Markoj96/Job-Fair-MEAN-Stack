@@ -1,0 +1,50 @@
+<div class="row" *ngIf="package">
+  <div class="col col-sm-12">
+    <div class="card rounded-0">
+      <div class="card-header">
+        <h3 class="mb-0">Package show</h3>
+      </div>
+      <div class="card-body">
+        <table class="table table-striped">
+          <tr>
+            <th>Title</th>
+            <td>{{ package.Title }}</td>
+          </tr>
+          <tr>
+            <th>Contents</th>
+            <td><span *ngFor="let content of package.Contents">"{{ content.Content }}", </span></td>
+          </tr>
+          <tr>
+            <th>VideoPromotion</th>
+            <td>{{ package.VideoPromotion }}</td>
+          </tr>
+          <tr>
+            <th>NoLessons</th>
+            <td>{{ package.NoLessons }}</td>
+          </tr>
+          <tr>
+            <th>NoWorkchops</th>
+            <td>{{ package.NoWorkchops }}</td>
+          </tr>
+          <tr>
+            <th>NoPresentation</th>
+            <td>{{ package.NoPresentation }}</td>
+          </tr>
+          <tr>
+            <th>Price</th>
+            <td>{{ package.Price }}</td>
+          </tr>
+          <tr>
+            <th>MaxCompanies</th>
+            <td>{{ package.MaxCompanies }}</td>
+          </tr>
+        </table>
+        <a *ngIf="authService.isAdministrator() == true" [routerLink]="['/packages/edit/', package._id]"><button class="btn btn-primary">Edit</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!package">
+  <h3>No such a package</h3>
+</div>

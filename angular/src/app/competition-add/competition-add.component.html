@@ -1,0 +1,39 @@
+<div class="row pb-5 pt-5">
+    <div class="col col-sm-12">
+      <div class="card rounded-0">
+        <div class="card-header">
+          <h3 class="mb-0">
+            Add Competition
+          </h3>
+        </div>
+        <div class="card-body">
+          <form #competitionForm="ngForm">
+            <div class="form-group">
+              <label for="">Competition title</label>
+              <input type="text" name="Title" #CompetitionTitle="ngModel" [(ngModel)]="competitionData.Title" class="form-control rounded-0" required>
+              <div class="alert alert-danger" *ngIf="CompetitionTitle.touched && !CompetitionTitle.valid">Competition title required</div>
+            </div>
+            <div class="form-group">
+              <label for="">Competition description</label>
+              <input type="text" name="Description" #CompetitionDescription="ngModel" [(ngModel)]="competitionData.Description" class="form-control rounded-0" required>
+              <div class="alert alert-danger" *ngIf="CompetitionDescription.touched && !CompetitionDescription.valid">Competition description required</div>
+            </div>
+            <div class="form-group">
+              <label for="">Competition type</label>
+              <select #CompetitionType="ngModel" [(ngModel)]="competitionData.Type" name="Type" class="form-control rounded-0" required>
+                <option value="Job">Job</option>
+                <option value="Internship">Internship</option>
+              </select>
+              <div class="alert alert-danger" *ngIf="CompetitionType.touched && !CompetitionType.valid">Competition type required</div>
+            </div>
+            <div class="form-group">
+              <label for="">Competition closing date</label>
+              <input type="date" name="DateTo" #CompetitionDateTo="ngModel" [(ngModel)]="competitionData.DateTo" class="form-control rounded-0" required>
+              <div class="alert alert-danger" *ngIf="CompetitionDateTo.touched && !CompetitionDateTo.valid">Competition date required</div>
+            </div>
+            <button type="button" class="btn btn-success" (click)="addCompetition()" [disabled]="!competitionForm.valid">Add</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

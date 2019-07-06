@@ -1,0 +1,229 @@
+<div class="row" *ngIf="cv">
+  <div class="col col-sm-12">
+    <div class="card rounded-0">
+      <div class="card-header">
+        <h3 class="mb-0">Curriculum Vitae</h3>
+      </div>
+      <div class="card-body">
+        <h4>Personal info</h4>
+        <hr />
+        <table class="table table-striped">
+          <tr>
+            <th>First name</th>
+            <td>{{ cv.First_Name }}</td>
+          </tr>
+          <tr>
+            <th>Last name</th>
+            <td>{{ cv.Last_Name }}</td>
+          </tr>
+          <tr>
+            <th>Date of birth</th>
+            <td>{{ cv.Birth_Date }}</td>
+          </tr>
+          <tr>
+            <th>Postal code</th>
+            <td>{{ cv.Postal_Code }}</td>
+          </tr>
+          <tr>
+            <th>City</th>
+            <td>{{ cv.City }}</td>
+          </tr>
+          <tr>
+            <th>Country</th>
+            <td>{{ cv.Country }}</td>
+          </tr>
+          <tr>
+            <th>Phone</th>
+            <td>{{ cv.Phone }}</td>
+          </tr>
+          <tr>
+            <th>Email</th>
+            <td>{{ cv.Emaiil }}</td>
+          </tr>
+          <tr>
+            <th>WEB site</th>
+            <td>{{ cv.WEB_Site }}</td>
+          </tr>
+        </table>
+
+        <h4>Work experience</h4>
+        <hr />
+        <table class="table table-striped" *ngFor="let work_experience of cv.Work_Experience; let i=index;">
+          <tr><th>Work experience {{ i }}</th><th></th></tr>
+          <tr>
+            <th>Date from</th>
+            <td>{{ cv.Work_Experience[i].dateFrom }}</td>
+          </tr>
+          <tr>
+            <th>Date to</th>
+            <td>{{ cv.Work_Experience[i].dateTo }}</td>
+          </tr>
+          <tr>
+            <th>Employer</th>
+            <td>{{ cv.Work_Experience[i].Employer }}</td>
+          </tr>
+          <tr>
+            <th>City</th>
+            <td>{{ cv.Work_Experience[i].City }}</td>
+          </tr>
+          <tr>
+            <th>Country</th>
+            <td>{{ cv.Work_Experience[i].Country }}</td>
+          </tr>
+          <tr>
+            <th>Description</th>
+            <td>{{ cv.Work_Experience[i].Description }}</td>
+          </tr>
+        </table>
+
+        <h4>Education and training</h4>
+        <hr />
+        <table class="table table-striped" *ngFor="let education_training of cv.Education_Training; let i=index;">
+          <tr><th>Education and training {{ i }}</th><th></th></tr>
+          <tr>
+            <th>Date from</th>
+            <td>{{ cv.Education_Training[i].dateFrom }}</td>
+          </tr>
+          <tr>
+            <th>Date to</th>
+            <td>{{ cv.Education_Training[i].dateTo }}</td>
+          </tr>
+          <tr>
+            <th>Title</th>
+            <td>{{ cv.Education_Training[i].Title }}</td>
+          </tr>
+          <tr>
+            <th>Organization</th>
+            <td>{{ cv.Education_Training[i].Organization }}</td>
+          </tr>
+          <tr>
+            <th>City</th>
+            <td>{{ cv.Education_Training[i].City }}</td>
+          </tr>
+          <tr>
+            <th>Country</th>
+            <td>{{ cv.Education_Training[i].Country }}</td>
+          </tr>
+          <tr>
+            <th>EQF Level</th>
+            <td>{{ cv.Education_Training[i].EQF_Level }}</td>
+          </tr>
+          <tr>
+            <th>Description</th>
+            <td>{{ cv.Education_Training[i].Description }}</td>
+          </tr>
+        </table>
+
+        <h4>Mother tongues</h4>
+        <hr />
+        <table class="table table-striped" *ngFor="let mother_tongue of cv.Mother_Tongues; let i=index;">
+          <tr><th>Mother tongue {{ i }}</th><th></th></tr>
+          <tr>
+            <th>Language</th>
+            <td>{{ cv.Mother_Tongues[i].Language }}</td>
+          </tr>
+        </table>
+
+        <h4>Foreign languages</h4>
+        <hr />
+        <table class="table table-striped" *ngFor="let foreign_language of cv.Foreign_Languages; let i=index;">
+          <tr><th>Foreign language {{ i }}</th><th></th></tr>
+          <tr>
+            <th>Language</th>
+            <td>{{ cv.Foreign_Languages[i].Language }}</td>
+          </tr>
+          <tr>
+            <th>Understanding -  listening</th>
+            <td>{{ cv.Foreign_Languages[i].Undersanding_Listening }}</td>
+          </tr>
+          <tr>
+            <th>Understanding - reading</th>
+            <td>{{ cv.Foreign_Languages[i].Understanding_Reading }}</td>
+          </tr>
+          <tr>
+            <th>Speaking - interaction</th>
+            <td>{{ cv.Foreign_Languages[i].Speaking_Interaction }}</td>
+          </tr>
+          <tr>
+            <th>Speaking - production</th>
+            <td>{{ cv.Foreign_Languages[i].Speakiing_Production }}</td>
+          </tr>
+          <tr>
+            <th>Writing</th>
+            <td>{{ cv.Foreign_Languages[i].Writing }}</td>
+          </tr>
+          <tr>
+            <th>Diploma/Certificate</th>
+            <td>{{ cv.Foreign_Languages[i].Diploma_Certificate }}</td>
+          </tr>
+        </table>
+
+        <h4>Communication skills</h4>
+        <hr />
+        <table class="table table-striped" *ngFor="let commnication_skill of cv.Communication_Skills; let i=index;">
+          <tr><th>Communication skill {{ i }}</th><th></th></tr>
+          <tr>
+            <th>Description</th>
+            <td>{{ cv.Commnication_Skills[i].Description }}</td>
+          </tr>
+        </table>
+
+        <h4>Organisatinal and Managerial skills</h4>
+        <hr />
+        <table class="table table-striped" *ngFor="let organisation_managerial_skill of cv.Organisational_Managerial_Skills; let i=index;">
+          <tr><th>Organisation and managerial skill {{ i }}</th><th></th></tr>
+          <tr>
+            <th>Description</th>
+            <td>{{ cv.Organisational_Managerial_Skills[i].Description }}</td>
+          </tr>
+        </table>
+
+        <h4>Job related skills</h4>
+        <hr />
+        <table class="table table-striped" *ngFor="let job_related_skill of cv.Job_Related_Skills; let i=index;">
+          <tr><th>Job related skill {{ i }}</th><th></th></tr>
+          <tr>
+            <th>Description</th>
+            <td>{{ cv.Job_Related_Skills[i].Description }}</td>
+          </tr>
+        </table>
+
+        <h4>Digital skills</h4>
+        <hr />
+        <table class="table table-striped" *ngFor="let digital_skill of cv.Digital_Skills; let i=index;">
+          <tr><th>Digital skill {{ i }}</th><th></th></tr>
+          <tr>
+            <th>Information processing</th>
+            <td>{{ cv.Digital_Skills[i].Information_Processing }}</td>
+          </tr>
+          <tr>
+            <th>Communication</th>
+            <td>{{ cv.Digital_Skills[i].Communication }}</td>
+          </tr>
+          <tr>
+            <th>Content reaction</th>
+            <td>{{ cv.Digital_Skills[i].Content_Reaction }}</td>
+          </tr>
+          <tr>
+            <th>Safety</th>
+            <td>{{ cv.Digital_Skills[i].Safety }}</td>
+          </tr>
+          <tr>
+            <th>Problem solving</th>
+            <td>{{ cv.Digital_Skills[i].Problem_Solving }}</td>
+          </tr>
+          <tr>
+            <th>OTher computer skills</th>
+            <td>{{ cv.Digital_Skills[i].Other_Computer_Skills }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="!cv">
+  <div class="col col-sm-12">
+    <h3>No such a CV</h3>
+  </div>
+</div>

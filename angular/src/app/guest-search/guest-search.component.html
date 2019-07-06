@@ -1,0 +1,57 @@
+<div class="row pt-5 pb-5">
+  <div class="col col-sm-12">
+    <div class="card rounded-0">
+      <div class="card-header">
+        <h3 class="mb-0">
+          Company Search
+        </h3>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <label for="">Company name</label>
+            <input type="text" name="CompanyName" [(ngModel)]="CompanyName"  class="form-control rounded-0">
+          </div>
+          <div class="form-group">
+              <label for="">Company city</label>
+              <input type="text" name="CompanyCity" [(ngModel)]="CompanyCity"  class="form-control rounded-0">
+            </div>
+          <div class="form-group">
+            <select multiple name="CompanyActivitiies" [(ngModel)]="CompanyActivities" class="form-control rounded-0">
+              <option value="IT">IT</option>
+              <option value="Telecomunications">Telecomunications</option>
+              <option value="Construction and architecture">Construction and architecture</option>
+              <option value="Mechanical engineering">Mechanical engineering</option>
+            </select>
+          </div>
+          <button type="button" class="btn btn-primary" (click)="searchCompany()">Search</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" *ngIf="searchResult">
+  <div class="col col-sm-12">
+    <div class="card rounded-0">
+      <div class="card-header">
+        <h3 class="mb-0">
+          Search results
+        </h3>
+      </div>
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>
+                Naziv
+              </th>
+            </tr>
+          </thead>
+          <tr *ngFor="let company of searchResult; let i=index">
+            <td><a [routerLink]="['/companies/show', company._id]">{{ company.Company_Name }}</a> </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

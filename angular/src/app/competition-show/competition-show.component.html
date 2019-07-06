@@ -1,0 +1,109 @@
+<div class="row pb-5 pt-5" *ngIf="competition">
+  <div class="col col-sm-12">
+    <div class="card rounded-0">
+      <div class="card-header">
+        <h3 class="mb-0">Competition page</h3>
+      </div>
+      <div class="card-body">
+        <table class="table table-striped">
+          <tr>
+            <th>Title</th>
+            <td>{{ competition.Title }}</td>
+          </tr>
+          <tr>
+            <th>Description</th>
+            <td>{{ competition.Description }}</td>
+          </tr>
+          <tr>
+            <th>Type</th>
+            <td>{{ competition.Type }}</td>
+          </tr>
+          <tr>
+            <th>Closing Date</th>
+            <td>{{ competition.DateTo | date: 'MMM dd, yyyy'}}</td>
+          </tr>
+          <tr *ngIf="(authService.getUserType() == 'Student')">
+            <th>Register IN</th>
+            <td *ngIf="competition.Registered_Users && !isUserRegistered(competition.Registered_Users, Username)">
+              <button *ngIf="registered == false" data-toggle="modal" data-target="#registerModal" class="btn btn-primary"
+                [disabled]="!compareDates(todayDate, competition.DateTo)">REGISTER IN</button>
+              <button *ngIf="registered == true" class="btn btn-success" [disabled]="true">REGISTERED</button>
+            </td>
+            <td *ngIf="competition.Registered_Users && isUserRegistered(competition.Registered_Users, Username)"><button
+                class="btn btn-success" [disabled]="true">REGISTERED</button></td>
+          </tr>
+        </table>
+        <h3 *ngIf="(authService.getUserType() == 'Company')">Registered users</h3>
+        <div *ngIf="(authService.getUserType() == 'Company') && (competition.Registered_Users) && (competition.Registered_Users.length == 0)">
+          No registered users
+        </div>
+        <table class="table table-secondary table-striped" *ngIf="(authService.getUserType() == 'Company')  && (competition.Registered_Users) && (competition.Registered_Users.length > 0)">
+          <tr>
+            <th>#</th>
+            <th>Username</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Cover letter</th>
+            <th>CV</th>
+            <th>Approve</th>
+          </tr>
+          <tr *ngFor="let user of competition.Registered_Users; let i=index;">
+            <td>{{ i }}</td>
+            <td>{{ user.Username }}</td>
+            <td>{{ user.First_Name }}</td>
+            <td>{{ user.Last_Name }}</td>
+            <td *ngIf="user.CoverLetterText">{{ user.CoverLetterText }}</td>
+            <td *ngIf="user.CoverLetterFile">{{ user.CoverLetterFile }}</td>
+            <td *ngIf="user.CV"><a [routerLink]="['/curriculum_vitae/show', user._id]">View</a></td>
+            <td *ngIf="!user.CV">No CV</td>
+
+            <td *ngIf="user.Approved == false"><button type="button" class="btn btn-primary" [disabled]="!compareDates(todayDate, competition.DateTo)"
+                (click)="approveUser(user._id, user)">APPROVE</button></td>
+            <td *ngIf="user.Approved == true"><button type="button" class="btn btn-success" [disabled]="true">APPROVED</button></td>
+          </tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="registerModal">Registration for competition {{ competition.Title }}</h5>
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form #competitionRegisterForm="ngForm">
+          <div class="modal-body">
+            <input type="radio" [(ngModel)]="letterType" name="letterType" value="text"> Text<br />
+            <input type="radio" [(ngModel)]="letterType" name="letterType" value="file"> File<br /><br />
+
+            <label for="">Cover letter</label>
+            <textarea *ngIf="letterType == 'text'" [(ngModel)]="coverLetterText" name="coverLetterText" class="form-control rounded-0"
+              required>
+
+          </textarea>
+
+            <div *ngIf="letterType == 'file'">
+              <input type="file" [(ngModel)]="selectedFile" name="selectedFile" required />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-success" (click)="registerIn(competition._id, competition)" [disabled]="!competitionRegisterForm.valid"
+              data-dismiss="modal">REGISTER IN</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="!competition">
+  <div class="col col-sm-12">
+    <h3>No such a competition</h3>
+  </div>
+</div>

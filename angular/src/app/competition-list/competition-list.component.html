@@ -1,0 +1,42 @@
+<div class="row pb-5 pt-5" *ngIf="competitions != null && competitions.length > 0">
+  <div class="col col-sm-12">
+    <div class="card rounded-0">
+      <div class="card-header">
+        <h3 class="mb-0">Competitions</h3>
+      </div>
+      <div class="card-body">
+        <table class="table table-striped">
+          <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Type</th>
+              <th>Closing Date</th>
+              <th *ngIf="Type == 'Student'">Status</th>
+          </tr>
+          <tr *ngFor="let competition of competitions; let i=index">
+            <td>{{ i }}</td>
+            <td><a [routerLink]="['/competitions/show', competition._id]">{{ competition.Title }}</a></td>
+            <td>{{ competition.Type }}</td>
+            <td>{{ competition.DateTo | date:'MMM dd, yyyy'}}</td>
+            <td *ngIf="Type == 'Student'">
+              <button *ngIf="compareDates(todayDate, competition.DateTo) && !isUserApproved(competition.Registered_Users, Username)" class="btn btn-warning" [disabled]="true">AWAITING CONFIRMATION</button>
+              <button *ngIf="isUserApproved(competition.Registered_Users, Username)" class="btn btn-success" [disabled]="true">ACCEPTED</button>
+              <button *ngIf="!compareDates(todayDate, competition.DateTo) && !isUserApproved(competition.Registered_Users, Username)" class="btn btn-danger" [disabled]="true">REJECTED</button>
+            </td>
+          </tr>
+        </table>
+        
+        <a *ngIf="Type == 'Company'" routerLink="/competitions/add" routerLinkActive="active"><button class="btn btn-primary">Add competition</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col col-sm-12" *ngIf="competitions == null || competitions.length == 0">
+    <h3 *ngIf="Type == 'Company'">You do not have any created competition</h3>
+    <h3 *ngIf="Type == 'Student'">You do not have any competition registered in</h3>
+
+    <a *ngIf="Type == 'Company'" routerLink="/competitions/add" routerLinkActive="active"><button class="btn btn-primary">Add competition</button></a>
+  </div>
+</div>

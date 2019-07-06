@@ -1,0 +1,29 @@
+<div class="row" *ngIf="additional">
+  <div class="col col-sm-12">
+    <div class="card rounded-0">
+      <div class="card-header">
+        <h3 class="mb-0">Additional page</h3>
+      </div>
+      <div class="card-body">
+        <table class="table table-striped">
+          <tr>
+            <th>Title</th>
+            <td>{{ additional.Title }}</td>
+          </tr>
+          <tr>
+            <th>Price</th>
+            <td>{{ additional.Price }}</td>
+          </tr>
+        </table>
+
+        <a *ngIf="authService.isAdministrator() == true" [routerLink]="['/additionals/edit/', additional._id]"><button class="btn btn-primary">Edit</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="!additional">
+  <div class="col col-sm-12">
+    No such a additional
+  </div>
+</div>

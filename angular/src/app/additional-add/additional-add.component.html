@@ -1,0 +1,27 @@
+<div class="row pt-5 pb-5">
+  <div class="col col-sm-12 mx-auto">
+    <div class="card rounded-0">
+      <div class="card-header">
+          <h3 class="mb-0">Add a new additional</h3>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="additionalForm">
+          <div class="row mb-1">
+            <div class="col">
+              <label for="">Title</label>
+              <input type="text" class="form-control rounded-0" formControlName="Title">
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col">
+              <label for="">Price</label>
+              <input type="number" class="form-control rounded-0" formControlName="Price">
+            </div>
+          </div>
+          <br />
+          <button type="button" class="btn btn-primary" (click)="addAdditional()">Save</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

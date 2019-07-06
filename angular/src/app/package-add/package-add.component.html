@@ -1,0 +1,82 @@
+<div class="row pt-5 pb-5">
+  <div class="col col-sm-12 mx-auto">
+    <div class="card rounded-0">
+      <div class="card-header">
+          <h3 class="mb-0">Add a new package</h3>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="packageForm">
+          <div class="row mb-1">
+            <div class="col">
+              <label for="">Title</label>
+              <input type="text" class="form-control rounded-0" formControlName="Title">
+            </div>
+          </div>
+          <div class="row">
+              <div class="col">
+                <label for="">Contents</label>
+                <hr />
+                <div formArrayName="Contents">
+                  <div *ngFor="let content of packageForm.controls.Contents.controls; let i=index">
+                    <div>
+                      <h5>Content {{i + 1}}</h5>
+                      <button class="btn btn-danger" *ngIf="packageForm.controls.Contents.controls.length > 0" (click)="removeContent(i)"> - </button>
+                    </div>
+                    <div [formGroupName]="i">
+                      <div class="row">
+                        <div class="col">
+                          <label for="">Content</label>
+                          <input type="text" class="form-control rounded-0" formControlName="Content">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br />
+                <button class="btn btn-primary" (click)="addContent()">+</button>
+              </div>
+          </div>
+          <hr />
+          <div class="row mb-1">
+            <div class="col">
+              <label for="">VideoPromotion</label>
+              <input type="number" class="form-control rounded-0" formControlName="VideoPromotion">
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col">
+              <label for="">NoLessons</label>
+              <input type="number" class="form-control rounded-0" formControlName="NoLessons">
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col">
+              <label for="">NoWorkchops</label>
+              <input type="number" class="form-control rounded-0" formControlName="NoWorkchops">
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col">
+              <label for="">NoPresentation</label>
+              <input type="number" class="form-control rounded-0" formControlName="NoPresentation">
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col">
+              <label for="">Price</label>
+              <input type="number" class="form-control rounded-0" formControlName="Price">
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col">
+              <label for="">MaxCompanies</label>
+              <input type="number" class="form-control rounded-0" formControlName="MaxCompanies">
+            </div>
+          </div>
+          <br />
+          <button type="button" class="btn btn-primary" (click)="addPackage()">Save</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

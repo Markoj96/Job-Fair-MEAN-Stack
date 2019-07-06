@@ -1,0 +1,221 @@
+<div class="row pt-5 pb-5">
+  <div class="col col-sm-6 mx-auto">
+    <div class="card rounded-0">
+      <div class="card-header">
+        <h3 class="mb-0">Register</h3>
+      </div>
+      <div class="card-body">
+        <form class="form" #registerForm="ngForm">
+          <div class="form-group">
+              <label for="">Register as:</label>
+              <div class="radio">
+                <label for=""><input type="radio" 
+                                    [(ngModel)]="user_type" 
+                                    name="user_type" 
+                                    value="Student"> Student</label>
+              </div>
+              <div class="radio">
+                <label for=""><input type="radio" 
+                                    [(ngModel)]="user_type" 
+                                    name="user_type" 
+                                    value="Company"> Company</label>
+              </div>
+          </div>
+          <!-- Defualt fields -->
+          <div class="form-group">
+            <label for="">Username:</label>
+            <input type="text" 
+                    #Username="ngModel" 
+                    [(ngModel)]="registerUserData.Username" 
+                    name="username" 
+                    class="form-control rounded-0" 
+                    required>
+            <div class="alert alert-danger" *ngIf="Username.touched && !Username.valid">Username required</div>
+            <div class="alert alert-danger" *ngIf="errorUsernameTaken != null">{{ errorUsernameTaken }}</div>
+          </div>
+          <div class="form-group">
+            <label for="">Password:</label>
+            <input type="password" 
+                  #Password="ngModel" 
+                  [(ngModel)]="registerUserData.Password" 
+                  name="password" 
+                  (change)="checkPassword(registerUserData.Password)"
+                  class="form-control rounded-0" 
+                  required>
+            <div class="alert alert-danger" *ngIf="Password.touched && !Password.valid">Password required</div>
+            <div class="alert alert-danger" *ngIf="Password.touched && !(checkPassword(registerUserData.Password))">Incorrect format</div>
+          </div>
+          <div class="form-group">
+            <label for="">Confirm password:</label>
+            <input type="password" 
+                  #confirmPassword="ngModel" 
+                  [(ngModel)]="registerUserData.repeatPassword" 
+                  name="repeatPassword" 
+                  class="form-control rounded-0" 
+                  required>
+            <div class="alert alert-danger" *ngIf="confirmPassword.touched && !confirmPassword.valid">Confirm password required</div>
+            <div class="alert alert-danger" *ngIf="!(registerUserData.Password === registerUserData.repeatPassword)">Passwords not same</div>
+          </div>
+          <div class="form-group">
+            <label for="">Email:</label>
+            <input type="email"
+                    #Email="ngModel" 
+                   [(ngModel)]="registerUserData.Email" 
+                   name="email" 
+                   class="form-control rounded-0" 
+                   required>
+            <div class="alert alert-danger" *ngIf="Email.touched && !Email.valid">Email required</div>
+            <div class="alert alert-danger" *ngIf="errorEmailTaken != null">{{ errorEmailTaken }}</div>
+          </div>
+          <!-- Student fields -->
+          <div class="form-group" *ngIf="user_type == 'Student'">
+            <label for="">First name:</label>
+            <input type="text" 
+                  #FirstName="ngModel" 
+                  [(ngModel)]="registerUserData.First_Name" 
+                  name="first_name" 
+                  class="form-control rounded-0" 
+                  required>
+            <div class="alert alert-danger" *ngIf="FirstName.touched && !FirstName.valid">First name required</div>
+          </div>
+          <div class="form-group" *ngIf="user_type == 'Student'">
+             <label for="">Last name:</label>
+            <input type="text" 
+                  #LastName="ngModel" 
+                  [(ngModel)]="registerUserData.Last_Name" 
+                  name="last_name" 
+                  class="form-control rounded-0" 
+                  required>
+            <div class="alert alert-danger" *ngIf="LastName.touched && !LastName.valid">Last name required</div>
+          </div>
+          <div class="form-group" *ngIf="user_type == 'Student'">
+            <label for="">Phone:</label>
+            <input type="text" 
+                  #Phone="ngModel" 
+                  [(ngModel)]="registerUserData.Phone" 
+                  name="phone" 
+                  class="form-control rounded-0" 
+                  required>
+            <div class="alert alert-danger" *ngIf="Phone.touched && !Phone.valid">Phone required</div>
+          </div>
+          <div class="form-group" *ngIf="user_type == 'Student'">
+            <label for="">Bachelor's degree:</label>
+            <input type="text" 
+                  #BachelorDegree="ngModel" 
+                  [(ngModel)]="registerUserData.Bachelors_degree" 
+                  name="bachelors_degree" 
+                  class="form-control rounded-0" 
+                  required>
+            <div class="alert alert-danger" *ngIf="BachelorDegree.touched && !BachelorDegree.valid">Bachelor's degree required</div>
+          </div>
+          <div class="form-group" *ngIf="user_type == 'Student'">
+            <label for="">Graduated:</label><br />
+            <select #Graduated="ngModel" 
+                    [(ngModel)]="registerUserData.Graduated" 
+                    name="graduated" 
+                    class="form-control rounded-0" 
+                    required>
+              <option value="Yes">Yes</option> 
+              <option value="No">No</option>
+            </select>
+            <div class="alert alert-danger" *ngIf="Graduated.touched && !Graduated.valid">Graduated required</div>
+          </div>
+          <!-- Company fields-->
+          <div class="form-group" *ngIf="user_type == 'Company'">
+              <label for="">Company name:</label>
+              <input type="text" 
+                    #CompanyName="ngModel" 
+                    [(ngModel)]="registerUserData.Company_Name" 
+                    name="Company_name" 
+                    class="form-control rounded-0" 
+                    required>
+              <div class="alert alert-danger" *ngIf="CompanyName.touched && !CompanyName.valid">Company name required</div>
+          </div>
+          <div class="form-group" *ngIf="user_type == 'Company'">
+              <label for="">Address (City and Street):</label>
+              <input type="text" 
+                    #Address="ngModel" 
+                    [(ngModel)]="registerUserData.Address" 
+                    name="address" 
+                    class="form-control rounded-0" 
+                    required>
+              <div class="alert alert-danger" *ngIf="Address.touched && !Address.valid">Address required</div>
+          </div>
+          <div class="form-group" *ngIf="user_type == 'Company'">
+              <label for="">Director's first name:</label>
+              <input type="text" 
+                    #DirectorFirstName="ngModel" 
+                    [(ngModel)]="registerUserData.Director_FirstName" 
+                    name="director_firstname" 
+                    class="form-control rounded-0" 
+                    required>
+              <div class="alert alert-danger" *ngIf="DirectorFirstName.touched && !DirectorFirstName.valid">Director's first name required</div>
+          </div>
+          <div class="form-group" *ngIf="user_type == 'Company'">
+              <label for="">Director's last name:</label>
+              <input type="text" 
+                    #DirectorLastName="ngModel" 
+                    [(ngModel)]="registerUserData.Director_LastName" 
+                    name="director_lastname" 
+                    class="form-control rounded-0" 
+                    required>
+              <div class="alert alert-danger" *ngIf="DirectorLastName.touched && !DirectorLastName.valid">Director's last name required</div>
+          </div>
+          <div class="form-group" *ngIf="user_type == 'Company'">
+              <label for="">TIN (Taxes Identification Number):</label>
+              <input type="text" 
+                    #TIN="ngModel" 
+                    [(ngModel)]="registerUserData.TIN" 
+                    name="TIN" 
+                    class="form-control rounded-0" 
+                    required>
+              <div class="alert alert-danger" *ngIf="TIN.touched && !TIN.valid">TIN required</div>
+          </div>
+          <div class="form-group" *ngIf="user_type == 'Company'">
+              <label for="">Employees number:</label>
+              <input type="text" 
+                    #EmployeesNumber="ngModel" 
+                    [(ngModel)]="registerUserData.Employees"
+                    name="employees" 
+                    class="form-control rounded-0" 
+                    required>
+              <div class="alert alert-danger" *ngIf="EmployeesNumber.touched && !EmployeesNumber.valid">Employees number required</div>
+          </div>
+          <div class="form-group" *ngIf="user_type == 'Company'">
+              <label for="">WEB Site:</label>
+              <input type="text" 
+                    #WEBSite="ngModel" 
+                    [(ngModel)]="registerUserData.WEB" 
+                    name="web" 
+                    class="form-control rounded-0" 
+                    required>
+              <div class="alert alert-danger" *ngIf="WEBSite.touched && !WEBSite.valid">WEB site required</div>
+          </div>
+          <div class="form-group" *ngIf="user_type == 'Company'">
+              <label for="">Activity:</label>
+              <select #Activity="ngModel" 
+                      [(ngModel)]="registerUserData.Activity" 
+                      name="activity" 
+                      class="form-control rounded-0" 
+                      required>
+                <option value="IT">IT</option> 
+                <option value="Telecomunications">Telecomunications</option> 
+                <option value="Energetics">Energetics</option> 
+                <option value="Construction and architecture">Construction and architecture</option>
+                <option value="Mechanical engineering">Mechanical engineering</option>
+              </select>
+              <div class="alert alert-danger" *ngIf="Activity.touched && !Activity.valid">Activity required</div>
+          </div>
+          <div class="form-group" *ngIf="user_type == 'Company'">
+              <label for="">Special activity:</label>
+              <input type="text" 
+                    [(ngModel)]="registerUserData.Special_Activity" 
+                    name="special_activity" 
+                    class="form-control rounded-0">
+          </div>
+          <button type="submit" (click)="registerUser()" class="btn btn-primary float-right" [disabled]="!(registerUserData.Password === registerUserData.repeatPassword) || !(checkPassword(registerUserData.Password)) || (!registerForm.valid)">Register</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

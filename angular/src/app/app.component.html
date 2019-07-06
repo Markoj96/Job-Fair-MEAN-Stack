@@ -1,0 +1,92 @@
+<!---------------------- NAVBAR ---------------------->
+<header>
+	<nav class="navbar navbar-expand-lg navbar-light bg-primary ">
+			<a class="navbar-brand" routerLink="">JobFair</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavDropdown">
+				<ul class="navbar-nav mr-auto">
+					<li class="navbar-item">
+						<a class="nav-link" routerLink="" routerLinkActive="active">Dashboard</a>
+					</li>
+					<li class="navbar-item" *ngIf="authService.loggedIn() && (authService.getUserType() == 'Student') && (authService.isAdministrator() == false)"> 
+						<a class="nav-link" routerLink="/curriculum_vitae" routerLinkActive="active">CV</a>
+					</li>
+					<li class="navbar-item" *ngIf="authService.loggedIn() && (authService.isAdministrator() == false)"> 
+						<a class="nav-link" routerLink="/competitions/list" routerLinkActive="active">Competitions</a>
+					</li>
+					<li class="navbar-item" *ngIf="authService.loggedIn() && (authService.getUserType() == 'Student') && (authService.isAdministrator() == false)"> 
+						<a class="nav-link" routerLink="/student_search" routerLinkActive="active">Search</a>
+					</li>
+					<li class="navbar-item" *ngIf="!authService.loggedIn()"> 
+						<a class="nav-link" routerLink="/guest_search" routerLinkActive="active">Search</a>
+					</li>
+					<li class="navbar-item" *ngIf="authService.loggedIn() && (authService.isAdministrator() == true)"> 
+						<a class="nav-link" routerLink="/system_settings" routerLinkActive="active">System settings</a>
+					</li>
+					<li class="nav-item dropdown" *ngIf="authService.loggedIn() && (authService.getUserType() == 'Company' || (authService.isAdministrator() == true))">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">
+							Fair
+						</a>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" routerLink="/packages/list">Packages</a>
+							<a class="dropdown-item" routerLink="/additionals/list">Additionals</a>
+							<a class="dropdown-item" routerLink="/fairs/list">Fairs</a>
+						</div>
+					</li>
+				</ul>
+				<ul class="navbar-nav">
+					<li class="navbar-item" *ngIf="!authService.loggedIn()"> 
+						<a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
+						</li>
+						<li class="navbar-item" *ngIf="!authService.loggedIn()">
+						<a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
+					</li>
+					<li class="navbar-item" *ngIf="authService.loggedIn()">
+						<a class="nav-link" href="" (click)="authService.logoutUser()">Logout</a>
+					</li>
+					<li class="navbar-item" *ngIf="!authService.loggedIn()">
+						<a class="nav-link" routerLink="/change_password" routerLinkActive="active">Change password</a>
+					</li>
+				</ul>
+			</div>
+	</nav>
+</header>
+
+
+<section class="h-100">
+  <div class="container-fluid ml-0 mr-0 pl-0 pr-0">
+    <div class="row">
+      <div class="col col-sm-12">
+			<div class="jumbotron bg-secondary">
+				<div class="container">
+					<router-outlet></router-outlet>
+				</div>
+			</div>
+      </div>
+    </div>
+  </div>  
+</section>
+
+
+<footer class="footer">
+	<div class="container-fluid text-center bg-primary">
+		<div class="row bg-primary">
+			<div class="col col-sm-12">
+				<div class="bg-primary text-center pb-2">
+					<br />
+					<a class="icon" href="http://www.facebook.com" target="_blank"><i class="fab fa-facebook fa-3x mr-3"></i></a>
+					<span class="icon"><i class="fab fa-google fa-3x mr-3"></i></span>
+					<span class="icon"><i class="fab fa-instagram fa-3x mr-3"></i> </span>
+				</div>
+			</div>
+		</div>
+		<div class="row bg-primary">
+			<div class="col col-sm-12">
+				<br />
+				<span class="icon">© 2019 Copyright: <a class="icon" href="http://www.jovanovicmarko.me" target="_blank">www.jovanovicmarko.me</a></span> 
+			</div>
+		</div>
+	</div>
+</footer>

@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col col-sm-12">
+      <div *ngIf="packages != null && packages.length > 0">
+        <div class="card rounded-0">
+          <div class="card-header">
+              <h3 class="mb-0">Package list</h3>
+          </div>
+          <div class="card-body">
+            <table class="table table-striped">
+              <th>#</th>
+              <th>Title</th>
+              <tr *ngFor="let package of packages; let i=index;">
+                <td>{{ i }}</td>
+                <td><a [routerLink]="['/packages/show', package._id]">{{ package.Title }}</a></td>
+              </tr>
+            </table>
+            <a *ngIf="authService.isAdministrator() == true" routerLink="/packages/add"><button class="btn btn-primary">Add package</button></a>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="packages == null">
+        <h3>No packages created</h3>
+        <a *ngIf="authService.isAdministrator() == true" routerLink="/packages/add"><button class="btn btn-primary">Add package</button></a>
+      </div>
+    </div>
+  </div>

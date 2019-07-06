@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col col-sm-12">
+    <div *ngIf="additionals != null && additionals.length > 0">
+      <div class="card rounded-0">
+        <div class="card-header">
+          <h3 class="mb-0">Additional list</h3>
+        </div>
+        <div class="card-body">
+          <table class="table table-striped">
+            <th>#</th>
+            <th>Title</th>
+            <tr *ngFor="let additional of additionals; let i=index;">
+              <td>{{ i }}</td>
+              <td><a [routerLink]="['/additionals/show', additional._id]">{{ additional.Title }}</a></td>
+            </tr>
+          </table>
+          <a *ngIf="authService.isAdministrator() == true" routerLink="/additionals/add"><button class="btn btn-primary">Add additional</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="additionals == null">
+  <div class="col col-sm-12">
+    <h3>No additionals created</h3>
+    <a *ngIf="authService.isAdministrator() == true" routerLink="/additionals/add"><button class="btn btn-primary">Add additional</button></a>
+  </div>
+</div>

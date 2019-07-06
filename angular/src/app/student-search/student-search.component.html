@@ -1,0 +1,61 @@
+<div class="row pt-5 pb-5">
+  <div class="col col-sm-12">
+    <div class="card rounded-0">
+      <div class="card-header">
+        <h3 class="mb-0">
+          Company & Competition Search
+        </h3>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <label for="">Company name</label>
+            <input type="text" name="CompanyName" [(ngModel)]="CompanyName"  class="form-control rounded-0">
+          </div>
+          <div class="form-group">
+            <label for="">Competition name</label>
+            <input type="text" name="CompanyName" [(ngModel)]="CompetitionTitle" class="form-control rounded-0">
+            <div class="form-check">
+              <input type="checkbox" name="JobSearch" [(ngModel)]="JobSearch" class="form-check-input"> Job
+            </div>
+            <div class="form-check">
+              <input type="checkbox" name="InternshipSearch" [(ngModel)]="InternshipSearch" class="form-check-input"> Internship
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary" (click)="searchCompanyAndCompetition()">Search</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" *ngIf="searchResult">
+  <div class="col col-sm-12">
+    <div class="card rounded-0">
+      <div class="card-header">
+        <h3 class="mb-0">
+          Search results
+        </h3>
+      </div>
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>
+                Title
+              </th>
+            </tr>
+          </thead>
+          <tr *ngFor="let company of searchResult.Companies; let i=index">
+            <td><a [routerLink]="['/companies/show', company._id]">{{ company.Company_Name }}</a> </td>
+          </tr>
+          <tr *ngFor="let job of searchResult.JobCompetitions; let i=index">
+            <td><a [routerLink]="['/competitions/show', job._id]">{{ job.Title }}</a></td>
+          </tr>
+          <tr *ngFor="let internship of searchResult.InternshipCompetitions; let i=index">
+            <td><a [routerLink]="['/competitions/show', internship._id]">{{ internship.Title }}</a></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
